@@ -68,4 +68,12 @@ fun FormBiodataScreen() {
             modifier = Modifier.fillMaxSize(),
             containerColor = colorResource(R.color.bg_dark)
         ) { innerPadding ->
-         
+            Image(
+                painter = painterResource(R.drawable.bg_header),
+                contentDescription = stringResource(R.string.cd_background),
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .padding(bottom = innerPadding.calculateBottomPadding())
+                    .fillMaxWidth()
+                    .height(dimensionResource(R.dimen.tinggi_header))
+            )
