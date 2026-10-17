@@ -110,3 +110,139 @@ fun FormCard(modifier: Modifier = Modifier) {
             experience.isNotEmpty() &&
             skillChecked.any { it }
 
+    val radiusCard = dimensionResource(R.dimen.radius_card)
+
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(topStart = radiusCard, topEnd = radiusCard))
+            .background(colorResource(R.color.putih))
+            .navigationBarsPadding()
+            .padding(dimensionResource(R.dimen.padding_card))
+    ) {
+        Column(
+            modifier = Modifier.verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = stringResource(R.string.form_title),
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Bold,
+                color = colorResource(R.color.ungu)
+            )
+            Text(
+                text = stringResource(R.string.form_subtitle),
+                style = MaterialTheme.typography.bodySmall,
+                color = colorResource(R.color.abu_teks),
+                modifier = Modifier.padding(vertical = dimensionResource(R.dimen.jarak_kecil))
+            )
+            Spacer(Modifier.height(dimensionResource(R.dimen.jarak)))
+
+            // Nama Depan + Nama Belakang
+            Row(modifier = Modifier.fillMaxWidth()) {
+                InputField(
+                    value = namaDepan,
+                    onChange = { namaDepan = it },
+                    label = stringResource(R.string.nama_depan),
+                    modifier = Modifier.weight(1f)
+                )
+                Spacer(Modifier.width(dimensionResource(R.dimen.jarak_kecil)))
+                InputField(
+                    value = namaBelakang,
+                    onChange = { namaBelakang = it },
+                    label = stringResource(R.string.nama_belakang),
+                    modifier = Modifier.weight(1f)
+                )
+            }
+            Spacer(Modifier.height(dimensionResource(R.dimen.jarak)))
+
+            // Email
+            InputField(
+                value = email,
+                onChange = { email = it },
+                label = stringResource(R.string.email),
+                modifier = Modifier.fillMaxWidth(),
+                keyboardType = KeyboardType.Email
+            )
+            Spacer(Modifier.height(dimensionResource(R.dimen.jarak)))
+
+            // Tgl Lahir + Experience
+            Row(modifier = Modifier.fillMaxWidth()) {
+                Box(modifier = Modifier.weight(1f)) {
+                    FieldKlik(
+                        value = tglLahir,
+                        label = stringResource(R.string.tgl_lahir),
+                        icon = R.drawable.ic_dropdown,
+                        iconDesc = stringResource(R.string.cd_kalender),
+                        onClick = { showDatePicker = true }
+                    )
+                }
+                Spacer(Modifier.width(dimensionResource(R.dimen.jarak_kecil)))
+                Box(modifier = Modifier.weight(1f)) {
+                    FieldKlik(
+                        value = experience,
+                        label = stringResource(R.string.experience),
+                        icon = R.drawable.ic_kalender,
+                        iconDesc = stringResource(R.string.cd_dropdown),
+                        onClick = { showDropdown = true }
+                    )
+                    DropdownMenu(
+                        expanded = showDropdown,
+                        onDismissRequest = { showDropdown = false }
+                    ) {
+                        opsiExperience.forEach { opsi ->
+                            DropdownMenuItem(
+                                text = { Text(opsi) },
+                                onClick = {
+                                    experience = opsi
+                                    showDropdown = false
+                                }
+                            )
+                        }
+                    }
+                }
+            }
+            Spacer(Modifier.height(dimensionResource(R.dimen.jarak)))
+
+            // Skill
+            Text(
+                text = stringResource(R.string.pilih_skill),
+                fontWeight = FontWeight.Bold,
+                color = colorResource(R.color.hitam),
+                textAlign = TextAlign.Start,
+                modifier = Modifier.fillMaxWidth()
+            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                skillIds.forEachIndexed { index, id ->
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.clickable { skillChecked[index] = !skillChecked[index] }
+                    ) {
+                        Checkbox(
+                            checked = skillChecked[index],
+                            onCheckedChange = { skillChecked[index] = it }
+                        )
+                        Text(
+                            text = stringResource(id),
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                    }
+                }
+            }
+            Spacer(Modifier.height(dimensionResource(R.dimen.jarak)))
+
+            // Tombol Proceed
+            Button(
+                onClick = { showResult = true },
+                enabled = formValid,
+                shape = RoundedCornerShape(dimensionResource(R.dimen.radius_field)),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = colorResource(R.color.ungu),
+                    contentColor = colorResource(R.color.putih),
+                    disabledContainerColor = colorResource(R.color.tombol_disabled),
+                    disabledContentColor = colorResource(R.color.putih)
+                ),
+                
