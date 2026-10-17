@@ -77,3 +77,13 @@ fun FormBiodataScreen() {
                     .fillMaxWidth()
                     .height(dimensionResource(R.dimen.tinggi_header))
             )
+        }
+        // Box form mengapung di atas Scaffold
+        FormCard(modifier = Modifier.align(Alignment.BottomCenter))
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun FormCard(modifier: Modifier = Modifier) {
+   
