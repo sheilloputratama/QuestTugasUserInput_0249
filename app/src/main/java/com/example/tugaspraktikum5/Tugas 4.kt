@@ -96,10 +96,3 @@ fun FormCard(modifier: Modifier = Modifier) {
     val skillLabels = skillIds.map { stringResource(it) }
     val skillChecked = remember { mutableStateListOf(false, false, false) }
 
-    var showDatePicker by remember { mutableStateOf(false) }
-    var showDropdown by remember { mutableStateOf(false) }
-    var showResult by remember { mutableStateOf(false) }
-
-    val opsiExperience = stringArrayResource(R.array.experience_list)
-    val polaTanggal = stringResource(R.string.format_tanggal)
-
