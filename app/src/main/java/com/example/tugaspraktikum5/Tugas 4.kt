@@ -86,4 +86,54 @@ fun FormBiodataScreen() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FormCard(modifier: Modifier = Modifier) {
-   
+    var namaDepan by remember { mutableStateOf("") }
+    var namaBelakang by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var tglLahir by remember { mutableStateOf("") }
+    var experience by remember { mutableStateOf("") }
+
+    val skillIds = listOf(R.string.skill_android, R.string.skill_uiux, R.string.skill_web)
+    val skillLabels = skillIds.map { stringResource(it) }
+    val skillChecked = remember { mutableStateListOf(false, false, false) }
+
+    var showDatePicker by remember { mutableStateOf(false) }
+    var showDropdown by remember { mutableStateOf(false) }
+    var showResult by remember { mutableStateOf(false) }
+
+    val opsiExperience = stringArrayResource(R.array.experience_list)
+    val polaTanggal = stringResource(R.string.format_tanggal)
+
+    val formValid = namaDepan.isNotBlank() &&
+            namaBelakang.isNotBlank() &&
+            email.isNotBlank() &&
+            tglLahir.isNotEmpty() &&
+            experience.isNotEmpty() &&
+            skillChecked.any { it }
+
+    val radiusCard = dimensionResource(R.dimen.radius_card)
+
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(topStart = radiusCard, topEnd = radiusCard))
+            .background(colorResource(R.color.putih))
+            .navigationBarsPadding()
+            .padding(dimensionResource(R.dimen.padding_card))
+    ) {
+        Column(
+            modifier = Modifier.verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = stringResource(R.string.form_title),
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Bold,
+                color = colorResource(R.color.ungu)
+            )
+            Text(
+                text = stringResource(R.string.form_subtitle),
+                style = MaterialTheme.typography.bodySmall,
+                color = colorResource(R.color.abu_teks),
+                modifier = Modifier.padding(vertical = dimensionResource(R.dimen.jarak_kecil))
+            )
+
