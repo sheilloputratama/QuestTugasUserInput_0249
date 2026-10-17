@@ -2,28 +2,35 @@
     <string name="app_name">Pertemuan5</string>
     <string name="form_title">Form Biodata</string>
     <string name="form_subtitle">Silahkan isi biodata Anda dibawah ini !!!</string>
+
+    <!-- COMMIT 5: Menambahkan string label input nama depan, nama belakang, email, tanggal lahir, dan experience -->
     <string name="nama_depan">Nama Depan</string>
     <string name="nama_belakang">Nama Belakang</string>
     <string name="email">Email</string>
     <string name="tgl_lahir">Tgl Lahir</string>
     <string name="experience">Experience</string>
+
+    <!-- COMMIT 6: Menambahkan string pilihan skill (Android, UI/UX, Web) dan daftar pilihan experience -->
     <string name="pilih_skill">Pilih Skill Anda :</string>
     <string name="skill_android">Android</string>
     <string name="skill_uiux">UI/UX</string>
     <string name="skill_web">Web</string>
-    <string name="proceed">Proceed</string>
-    <string name="ok">OK</string>
-    <string name="batal">Batal</string>
-    <string name="format_tanggal">dd/MM/yyyy</string>
-    <string name="cd_background">Gambar latar belakang form</string>
-    <string name="cd_kalender">Pilih tanggal</string>
-    <string name="cd_dropdown">Buka pilihan</string>
-    <string name="hasil_title">Data Anda</string>
-    <string name="hasil_isi">Nama: %1$s\nEmail: %2$s\nTgl Lahir: %3$s\nExperience: %4$s\nSkill: %5$s</string>
 
     <string-array name="experience_list">
         <item>Pemula</item>
         <item>1 - 3 Tahun</item>
         <item>Lebih dari 3 Tahun</item>
     </string-array>
+
+    <!-- COMMIT 7: Menambahkan string tombol, dialog, format tanggal, zona waktu, dan content description -->
+    <string name="proceed">Proceed</string>
+    <string name="ok">OK</string>
+    <string name="batal">Batal</string>
+    <string name="format_tanggal">dd/MM/yyyy</string>
+    <string name="zona_waktu" translatable="false">UTC</string>
+    <string name="cd_background">Gambar latar belakang form</string>
+    <string name="cd_kalender">Pilih tanggal</string>
+    <string name="cd_dropdown">Buka pilihan</string>
+    <string name="hasil_title">Data Anda</string>
+    <string name="hasil_isi">Nama: %1$s\nEmail: %2$s\nTgl Lahir: %3$s\nExperience: %4$s\nSkill: %5$s</string>
 </resources>
