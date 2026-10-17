@@ -245,4 +245,57 @@ fun FormCard(modifier: Modifier = Modifier) {
                     disabledContainerColor = colorResource(R.color.tombol_disabled),
                     disabledContentColor = colorResource(R.color.putih)
                 ),
-                
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(dimensionResource(R.dimen.tinggi_tombol))
+            ) {
+                Text(stringResource(R.string.proceed))
+            }
+        }
+    }
+
+    // Dialog pilih tanggal
+    if (showDatePicker) {
+        val dateState = rememberDatePickerState()
+        DatePickerDialog(
+            onDismissRequest = { showDatePicker = false },
+            confirmButton = {
+                TextButton(onClick = {
+                    dateState.selectedDateMillis?.let { millis ->
+                        val formatter = SimpleDateFormat(polaTanggal, Locale.getDefault())
+                        formatter.timeZone = TimeZone.getTimeZone("UTC")
+                        tglLahir = formatter.format(Date(millis))
+                    }
+                    showDatePicker = false
+                }) { Text(stringResource(R.string.ok)) }
+            },
+            dismissButton = {
+                TextButton(onClick = { showDatePicker = false }) {
+                    Text(stringResource(R.string.batal))
+                }
+            }
+        ) {
+            DatePicker(state = dateState)
+        }
+    }
+
+    // Dialog hasil
+    if (showResult) {
+        val skillTerpilih = skillLabels
+            .filterIndexed { index, _ -> skillChecked[index] }
+            .joinToString()
+        AlertDialog(
+            onDismissRequest = { showResult = false },
+            title = { Text(stringResource(R.string.hasil_title)) },
+            text = {
+                Text(
+                    stringResource(
+                        R.string.hasil_isi,
+                        "$namaDepan $namaBelakang",
+                        email,
+                        tglLahir,
+                        experience,
+                        skillTerpilih
+                    )
+                )
+            },
